@@ -1,0 +1,56 @@
+/* 
+
+
+
+.container {
+    display: flex;
+    position: relative;
+  }
+  
+  .menu {
+    flex: 1;
+   border: 1px solid;
+    height: 100vh;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width:230px;
+    background: #014DAF;
+    padding:27px 13px 30.58px ;
+    
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-left: 230px;
+    overflow: auto;
+  }
+
+  
+  .wrapper {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .main {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .cards {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  
+  .side {
+    flex: 1;
+  }
+  
+ */
