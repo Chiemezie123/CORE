@@ -13,9 +13,9 @@ export default function CancelIcon({ className }: { className?: string }) {
       <path
         d="M13 1L1 13M1 1L13 13"
         stroke="#667085"
-        strokewidth="2"
+        strokeWidth="2"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
