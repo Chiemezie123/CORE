@@ -11,16 +11,14 @@ const DoughnutChart = () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null); 
 
     useEffect(() => {
+        if (!canvasRef.current) return;
 
-    if (!canvasRef.current) return;
+        if (chartRef.current) {
+            chartRef.current.destroy();
+        }
 
-    if (chartRef.current) {
-      chartRef.current.destroy();
-    }
-
-  
-    const ctx = canvasRef.current.getContext('2d');
-    if (!ctx) return;
+        const ctx = canvasRef.current.getContext('2d');
+        if (!ctx) return;
 
         const data = {
             labels: ['Active', 'Inactive', 'Blocked', 'Expired', 'Lost'], 
@@ -45,13 +43,13 @@ const DoughnutChart = () => {
             type: 'doughnut', 
             data: data,
             options: {
-                cutout: '90%',
+                cutout: '90%', // Adjust the size of the center hole
                 plugins: {
                     legend: {
                         display: true,
                         position: 'bottom',
                         labels: {
-                            boxWidth:10, 
+                            boxWidth: 10, 
                             padding: 27, 
                             usePointStyle: true, 
                             font: {
@@ -66,14 +64,12 @@ const DoughnutChart = () => {
                     },
                 },
                 responsive: true, 
-                maintainAspectRatio: false, 
+                maintainAspectRatio: false, // Allow the chart to fill the container
             },
         };
 
-    
         chartRef.current = new Chart(ctx, config);
 
-        
         return () => {
             if (chartRef.current) {
                 chartRef.current.destroy();
@@ -83,11 +79,17 @@ const DoughnutChart = () => {
 
     return (
         <div className="relative w-full h-full">
-            <canvas ref={canvasRef} width="400" height="260"></canvas>
+            {/* Canvas element without fixed width/height */}
+            <canvas ref={canvasRef} className="w-full h-full"></canvas>
+            {/* Centered text */}
             <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center flex flex-col gap-1">
-                    <Typography variant="p-s" color="gray-500" font="Satoshi" fontWeight="medium" className="leading-normal" >Total Cards</Typography>
-                    <Typography variant="p-xxl" color="cod-gray-950" font="Satoshi" fontWeight="medium">2,450</Typography>
+                    <Typography variant="p-s" color="gray-500" font="Satoshi" fontWeight="medium" className="leading-normal">
+                        Total Cards
+                    </Typography>
+                    <Typography variant="p-xxl" color="cod-gray-950" font="Satoshi" fontWeight="medium">
+                        2,450
+                    </Typography>
                 </div>
             </div>
         </div>

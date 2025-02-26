@@ -13,7 +13,7 @@ export const typography = cva("", {
     intent: {
       "h-xxl": "text-h-xxl mmd:text-h-xl mxs:text-h-l",
       "h-xl": "text-h-xl mmd:text-h-l mxs:text-h-m ",
-      "h-l": "text-h-l mmd:text-h-m mxs:text-h-s",
+      "h-l": "text-h-l mxl:text-h-m mlg:text-h-s",
       "h-m": "text-m mmd:text-s",
       "h-s": "text-h-s",
       "h-xs": "text-h-xs",
@@ -25,7 +25,7 @@ export const typography = cva("", {
       "c-xxl": "text-c-xxl ",
       "c-xl": "text-c-xl",
       "c-l": "text-c-l",
-      "c-m": "text-c-m",
+      "c-m": "text-c-m mxl:text-c-s",
       "c-s": "text-c-s",
       span: "",
       div: "",

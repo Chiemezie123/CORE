@@ -30,14 +30,14 @@ export default function AnalysisCard(props:AnalysisCardProps) {
                         <GreenArrow/>
                     </div>
                     <div>
-                   <Typography color="green-haze-900" variant="p-s" font="Satoshi" fontWeight="medium">
+                   <Typography color="green-haze-900" variant="p-s" font="Satoshi" fontWeight="regular" className='mxl:font-regular'>
                    {props.rating}
                    </Typography>
                     </div>
                 </div>
                )}
                 <div>
-                  <Typography color={`${props.isWhich === "rate"?"black-200":"tahiti-gold-500"}`} variant="c-m" font="Satoshi" fontWeight="medium">
+                  <Typography color={`${props.isWhich === "rate"?"black-200":"tahiti-gold-500"}`} variant="c-m" fontWeight="regular" className='mxl:font-regular'>
                   {props.event}
                   </Typography>
                 </div>

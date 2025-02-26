@@ -17,7 +17,7 @@ const config: Config = {
   		xl: '1280px',
   		'2xl': '1440px',
   		mxl: {
-  			max: '1279px'
+  			max: '1390px'
   		},
   		mlg: {
   			max: '1049px'
@@ -164,14 +164,14 @@ const config: Config = {
   				'0.875rem',
   				{
   					lineHeight: '15.96px',
-  					fontWeight: 700
+  					fontWeight: 400
   				}
   			],
   			'c-s': [
   				'0.75rem',
   				{
   					lineHeight: '12px',
-  					fontWeight: 700
+  					fontWeight: 400
   				}
   			]
   		},

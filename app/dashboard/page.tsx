@@ -1,7 +1,10 @@
- 
- import React from "react";
+import React from "react";
 import { Typography } from "@/components/typography";
-import { AnalsisCardArray, CardRequested, listCardArray } from "@/constant/data";
+import {
+  AnalsisCardArray,
+  CardRequested,
+  listCardArray,
+} from "@/constant/data";
 import ListingCards from "@/components/Cards/listingCards";
 import { Dash, Expand } from "@/assets/svg2";
 import AnalysisCard from "@/components/Cards/AnalysisCard";
@@ -14,13 +17,10 @@ import { Calender } from "@/assets/svg2";
 import StatusModal from "@/components/modal/StatusModal";
 
 export default function Page() {
-
-  const RCR = ['Branch', 'Card Type', 'Quantity', 'Status','Action'];
-
+  const RCR = ["Branch", "Card Type", "Quantity", "Status", "Action"];
 
   return (
     <div className="bg-[#F8FBFF] h-full px-[20px] pt-[8px] pb-[20px] relative">
-    
       <div className="flex justify-between items-start">
         <div className="flex flex-col gap-[6px]">
           <div className="">
@@ -49,11 +49,25 @@ export default function Page() {
         <div className="inline-flex py-[8px] px-[13px] justify-center items-center border border-[#D0D5DD] rounded-[4px]">
           <div className="flex items-center gap-[8px]">
             <div className="flex items-center gap-1">
-              <Calender/>
-              <Typography color="cod-gray-950" variant="c-m" fontWeight="regular" font="Satoshi">Today</Typography>
+              <Calender />
+              <Typography
+                color="cod-gray-950"
+                variant="c-m"
+                fontWeight="regular"
+                font="Satoshi"
+              >
+                Today
+              </Typography>
             </div>
             <div>
-              <Typography variant="c-m" color="cod-gray-950" font="Satoshi" fontWeight="regular">11 Nov 2024</Typography>
+              <Typography
+                variant="c-m"
+                color="cod-gray-950"
+                font="Satoshi"
+                fontWeight="regular"
+              >
+                11 Nov 2024
+              </Typography>
             </div>
           </div>
         </div>
@@ -76,7 +90,7 @@ export default function Page() {
           ))}
         </div>
       </div>
-      <div className="flex items-center gap-[8px] w-full">
+      <div className="flex items-center gap-[8px] w-full my-2">
         <div>
           <Typography
             variant="h-m"
@@ -88,12 +102,10 @@ export default function Page() {
             Analytics
           </Typography>
         </div>
-        <div>
-          {/* <Dash /> */}
-        </div>
+        <div>{/* <Dash /> */}</div>
       </div>
       <div className="flex items-center gap-[8px] mt-[10px]">
-        {AnalsisCardArray.map((items,index) => (
+        {AnalsisCardArray.map((items, index) => (
           <AnalysisCard
             key={index}
             title={items.title}
@@ -106,74 +118,111 @@ export default function Page() {
           />
         ))}
       </div>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-[8px] mt-[8px] auto-rows-[minmax(min-content, max-content)]">
-    {/* First Row */}
-    <div className="h-[318px] border border-[#E2E2E2] rounded-[12px] bg-[#fff] flex flex-col gap-1">
+      <div className="flex mt-[8px] w-full gap-[8px]">
+        <div className="flex flex-col gap-[8px] w-1/2">
+          <div className=" flex-1 h-[318px] border border-[#E2E2E2] rounded-[12px] bg-[#fff] flex flex-col gap-6">
+            <Typography
+              color="cod-gray-950"
+              variant="h-m"
+              font="Satoshi"
+              fontWeight="medium"
+              className="px-[10px] pt-[10px]"
+            >
+              Monthly Issuance
+            </Typography>
+            <div className="flex-1 w-full">
+              <MonthlyIssuanceChart />
+            </div>
+          </div>
+
+          <div className="flex-1 h-[290px] border border-[#E2E2E2] rounded-[12px] bg-[#fff] p-[1rem] flex flex-col gap-4">
+            <div className="flex items-center">
+              <div>
+                <Typography
+                  color="cod-gray-950"
+                  variant="h-m"
+                  font="Satoshi"
+                  fontWeight="medium"
+                  className="leading-[18px]"
+                >
+                  This Week’s Income
+                </Typography>
+              </div>
+            </div>
+            <div className="flex-1">
+              <LineChart />
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-[8px] w-1/2">
+          <div className="h-[290px] border border-[#E2E2E2] rounded-[12px] bg-[#fff] px-[1rem] pt-[1rem] pb-[33px] flex flex-col gap-[1.5rem]">
+            <div className="flex justify-between items-center">
+              <div>
+                <Typography
+                  color="cod-gray-950"
+                  variant="h-m"
+                  font="Satoshi"
+                  fontWeight="medium"
+                  className="leading-[18px]"
+                >
+                  Recent Card Requests
+                </Typography>
+              </div>
+              <div>
+                <Expand />
+              </div>
+            </div>
+            <div>
+              <div className="border w-full h-[34px] bg-[#F1F7FF] flex">
+                {RCR.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex p-[8px_22px] justify-center items-center gap-3 flex-1 flex-shrink-0"
+                  >
+                    <Typography
+                      color="black-950"
+                      variant="p-s"
+                      font="Satoshi"
+                      fontWeight="medium"
+                      className="leading-[18px]"
+                    >
+                      {item}
+                    </Typography>
+                  </div>
+                ))}
+              </div>
+              <div>
+                {CardRequested.map((item, index) => (
+                  <ReqCards
+                    key={index}
+                    branch={item.branch}
+                    cardType={item.cardType}
+                    quantity={item.quantity}
+                    status={item.status}
+                    action={item.action}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="h-[318px] border border-[#E2E2E2] rounded-[12px] bg-[#fff] p-[1rem] flex flex-col">
+    <div className="flex items-center">
         <Typography
             color="cod-gray-950"
             variant="h-m"
             font="Satoshi"
             fontWeight="medium"
-            className="px-[10px] pt-[10px]"
+            className="leading-[18px]"
         >
-            Monthly Issuance
+            Card Status Distribution
         </Typography>
-        <MonthlyIssuanceChart />
     </div>
-    <div className="h-[290px] border border-[#E2E2E2] rounded-[12px] bg-[#fff] px-[1rem] pt-[1rem] pb-[33px] flex flex-col gap-[1.5rem]">
-        <div className="flex justify-between items-center">
-          <div>
-          <Typography color="cod-gray-950" variant="h-m" font="Satoshi" fontWeight="medium" className="leading-[18px]">Recent Card Requests</Typography>
-          </div>
-          <div>
-          <Expand/>
-          </div>
-        </div>
-        <div>
-  <div className="border w-full h-[34px] bg-[#F1F7FF] flex">
-    {RCR.map((item, index) => (
-      <div key={index} className="flex p-[8px_22px] justify-center items-center gap-3 flex-1 flex-shrink-0">
-        <Typography color="black-950" variant="p-s" font="Satoshi" fontWeight="medium" className="leading-[18px]">
-          {item}
-        </Typography>
-      </div>
-    ))}
-  </div>
-  <div>
-    {CardRequested.map((item, index) => (
-      <ReqCards
-        key={index} 
-        branch={item.branch}
-        cardType={item.cardType}
-        quantity={item.quantity}
-        status={item.status}
-        action={item.action}
-      />
-    ))}
-  </div>
-</div>
-    </div>
-    <div className="h-[290px] border border-[#E2E2E2] rounded-[12px] bg-[#fff] p-[1rem] flex flex-col gap-4">
-    <div className="flex items-center">
-      <div>
-      <Typography color="cod-gray-950" variant="h-m" font="Satoshi" fontWeight="medium" className="leading-[18px]">This Week’s Income</Typography>
-      </div>
-      </div>
-        <div className="flex-1">
-            <LineChart/>
-        </div>
-    </div>
-    <div className="h-[318px] border border-[#E2E2E2] rounded-[12px] bg-[#fff] p-[1rem]">
-    <div className="flex items-center">
-      <div>
-      <Typography color="cod-gray-950" variant="h-m" font="Satoshi" fontWeight="medium" className="leading-[18px]">Card Status Distribution</Typography>
-      </div>
-      </div>
-        <div className="">
-        <DoughnutChart/>
-        </div>
+    <div className="flex-1 min-h-0"> {/* Ensure this div takes remaining space and doesn't overflow */}
+        <DoughnutChart />
     </div>
 </div>
+        </div>
+      </div>
     </div>
   );
 }

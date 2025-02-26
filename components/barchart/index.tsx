@@ -1,11 +1,25 @@
 'use client'
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Chart, ChartConfiguration, ChartTypeRegistry } from 'chart.js/auto';
 import { Typography } from '../typography';
 
 const MonthlyIssuanceChart = () => {
     const chartRef = useRef<Chart | null>(null); 
     const canvasRef = useRef<HTMLCanvasElement | null>(null); 
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [windowWidth]);
+
     useEffect(() => {
         if (!canvasRef.current) return;
 
@@ -15,7 +29,9 @@ const MonthlyIssuanceChart = () => {
 
         const ctx = canvasRef.current.getContext('2d');
         if (!ctx) return;
-       
+
+        const fontSize = windowWidth < 1390 ? 10 : 12; // Adjust the breakpoint as needed
+
         const data = {
             labels: [ 'May', 'June', 'July', 'August', 'September', 'October', 'November'], 
             datasets: [
@@ -34,7 +50,6 @@ const MonthlyIssuanceChart = () => {
             ]
         };
 
-     
         const config: ChartConfiguration<'bar', number[], string>  = {
             type: 'bar',
             data: data,
@@ -53,7 +68,7 @@ const MonthlyIssuanceChart = () => {
                             usePointStyle: true,
                             font: {
                                 family: 'Satoshi, sans-serif',
-                                size: 12, 
+                                size: fontSize, 
                             },
                         },
                     }   
@@ -70,7 +85,7 @@ const MonthlyIssuanceChart = () => {
                         ticks:{
                             font: {
                                 family: 'Satoshi, sans-serif',
-                                size: 12, 
+                                size: fontSize, 
                                 
                             },
                         }
@@ -85,7 +100,7 @@ const MonthlyIssuanceChart = () => {
                             stepSize: 10, 
                             font: {
                                 family: 'Satoshi, sans-serif', 
-                                size: 12, 
+                                size: fontSize, 
                                 
                             },
                             
@@ -100,20 +115,18 @@ const MonthlyIssuanceChart = () => {
             }
         };
 
-        
         chartRef.current = new Chart(ctx, config);
 
-        
         return () => {
             if (chartRef.current) {
                 chartRef.current.destroy();
             }
         };
-    }, []);
+    }, [windowWidth]);
 
     return (
-        <div>
-            <canvas ref={canvasRef} width="400" height="200"></canvas>
+        <div style={{ width: '100%', height: '100%' }}>
+            <canvas ref={canvasRef} className=''></canvas>
         </div>
     );
 };

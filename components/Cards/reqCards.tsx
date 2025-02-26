@@ -29,7 +29,7 @@ export default function ReqCards(props: ReqCardProps) {
   const statusStyle = statusStyles[status] || statusStyles.Default;
 
   return (
-    <div className="w-full grid grid-cols-5 gap-0 border-b">
+    <div className="w-full grid grid-cols-5 gap-0 border-t">
       {/* Branch */}
       <div className="flex py-[10px] px-[24px] justify-center items-center">
         <Typography
