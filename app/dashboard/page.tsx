@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import { Typography } from "@/components/typography";
 import {
@@ -16,14 +16,19 @@ import ReqCards from "@/components/Cards/reqCards";
 import { Calender } from "@/assets/svg2";
 import dynamic from "next/dynamic";
 
-const MonthlyIssuanceChart = dynamic(() => import("../../components/barchart"), { ssr: false });
+const MonthlyIssuanceChart = dynamic(
+  () => import("../../components/barchart"),
+  { ssr: false }
+);
 
- const LineChart = dynamic(() => import("../../components/lineChart"), { ssr: false });
- const DoughnutChart = dynamic(() => import("../../components/doughnutChart"), { ssr: false });
+const LineChart = dynamic(() => import("../../components/lineChart"), {
+  ssr: false,
+});
+const DoughnutChart = dynamic(() => import("../../components/doughnutChart"), {
+  ssr: false,
+});
 
 export default function Page() {
-  
-
   const RCR = ["Branch", "Card Type", "Quantity", "Status", "Action"];
 
   return (
@@ -142,7 +147,7 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="flex-1 h-[290px] border border-[#E2E2E2] rounded-[12px] bg-[#fff] p-[1rem] flex flex-col gap-4">
+          <div className="flex-1 h-[200px] border border-[#E2E2E2] rounded-[12px] bg-[#fff] p-[1rem] flex flex-col gap-4">
             <div className="flex items-center">
               <div>
                 <Typography
@@ -156,9 +161,7 @@ export default function Page() {
                 </Typography>
               </div>
             </div>
-            <div className="flex-1">
-              <LineChart />
-            </div>
+            <div className="flex-1"><LineChart /></div>
           </div>
         </div>
         <div className="flex flex-col gap-[8px] w-1/2">
@@ -213,21 +216,21 @@ export default function Page() {
             </div>
           </div>
           <div className="h-[318px] border border-[#E2E2E2] rounded-[12px] bg-[#fff] p-[1rem] flex flex-col">
-        <div className="flex items-center">
-            <Typography
+            <div className="flex items-center">
+              <Typography
                 color="cod-gray-950"
                 variant="h-m"
                 font="Satoshi"
                 fontWeight="medium"
                 className="leading-[18px]"
-            >
+              >
                 Card Status Distribution
-            </Typography>
-        </div>
-        <div className="flex-1 min-h-0"> 
-            <DoughnutChart />
-        </div>
-        </div>
+              </Typography>
+            </div>
+            <div className="flex-1 min-h-0">
+              <DoughnutChart />
+            </div>
+          </div>
         </div>
       </div>
     </div>

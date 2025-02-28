@@ -7,28 +7,31 @@ import acknowledge from '../../assets/svg/acknowledge.svg'
 import dispatch from '../../assets/svg/dispatch.svg'
 import progress from '../../assets/svg/progress.svg'
 import ready from '../../assets/svg/ready.svg'
-import { ActionLoadingState, ButtonAction, ModalProps, RequestModalProps } from './index.types';
+import {ActionLoadingState, ButtonAction, ModalProps, RequestModalProps} from './index.types';
 
 import StatusModal from '../modal/StatusModal';
 import { tableData } from '@/constant/data';
 
 const RequestCard: React.FC = () => {
     const { data, setData,dataIndex,setIsActionLoading, isActionLoading, modalOpen, setModalOpen } = useStateContext();
-   const [modalState,setModalState]=useState<RequestModalProps>({
+   const [modalState,setModalState]= useState<RequestModalProps>({
          statusText:"",
          status:"",
          buttonText:""
-   })
+   });
+
    const modalRef = useRef<HTMLDivElement>(null);
+
    useEffect(()=>{
     const storedIndex = localStorage.getItem("dataIndex");
     
     if (storedIndex !== null) {
       const numericIndex = parseInt(storedIndex, 10);
-      setData(tableData[numericIndex ])
+      setData(tableData[numericIndex])
     }
   
-   },[data])
+   },[data]);
+
     const handleAction = (action: ButtonAction) => {
         switch (action) {
             case "progress":

@@ -1,36 +1,37 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Chart, ChartConfiguration, ChartTypeRegistry } from "chart.js/auto";
+import { Chart, ChartConfiguration } from "chart.js/auto";
 
 const MonthlyIssuanceChart = () => {
   const chartRef = useRef<Chart | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [windowWidth, setWindowWidth] = useState(0);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  // Handle window resize
   useEffect(() => {
-    if (window !== undefined) {
-      const handleResize = () => {
-        setWindowWidth(window?.innerWidth);
-      };
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
 
-      window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize);
 
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
-    }
-  }, [windowWidth]);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
+  // Initialize and update the chart
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      console.log("tony");
-    }
-    if (!canvasRef.current) return;
+    if (!canvasRef.current || !containerRef.current) return;
 
+    // Destroy existing chart if it exists
     if (chartRef.current) {
       chartRef.current.destroy();
     }
 
+    // Set canvas dimensions to match the parent container
+    const container = containerRef.current;
     const ctx = canvasRef.current.getContext("2d");
     if (!ctx) return;
 
@@ -115,24 +116,44 @@ const MonthlyIssuanceChart = () => {
           },
         },
         responsive: true,
+        maintainAspectRatio: false,
         interaction: {
           mode: "index",
         },
       },
     };
 
+    // Create the chart
     chartRef.current = new Chart(ctx, config);
 
+    // ResizeObserver to handle container resizing
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        if (canvasRef.current) {
+          canvasRef.current.width = width;
+          canvasRef.current.height = height;
+        }
+        if (chartRef.current) {
+          chartRef.current.resize();
+        }
+      }
+    });
+
+    resizeObserver.observe(container);
+
+    // Cleanup
     return () => {
       if (chartRef.current) {
         chartRef.current.destroy();
       }
+      resizeObserver.disconnect();
     };
   }, [windowWidth]);
 
   return (
-    <div style={{ width: "100%", height: "100%" }}>
-      <canvas ref={canvasRef} className=""></canvas>
+    <div ref={containerRef} style={{ width: "100%", height: "95%", position: "relative" }}>
+      <canvas ref={canvasRef} style={{ width: "100%", height: "100%" }}></canvas>
     </div>
   );
 };

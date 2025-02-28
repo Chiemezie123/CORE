@@ -8,6 +8,7 @@ import { useStateContext } from '@/app/contexts/StateProvider';
 const Table = ({tableData,tableHeader}:TableProps) => {
     const router = useRouter();
     const { setData } = useStateContext();
+    
   const handleView = (data:TableDataProps,index:number ) =>{
     router.push(`/dashboard/RequestDetails`);
     setData(data);
