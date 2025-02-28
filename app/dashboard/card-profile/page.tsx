@@ -23,7 +23,9 @@ const data = {
 };
 
 export default function Page() {
+
   const router = useRouter();
+
   return (
     <section className="bg-[#F8FBFF] h-full px-[1.25rem] ">
       <div className="mt-[0.625rem]">
@@ -86,7 +88,7 @@ export default function Page() {
                 <div
                   key={index}
                   className={clsx(
-                    "px-6 py-[0.73rem] bg-white w-full, flex items-center gap-4 h-[2.959rem] mt-[0.9px]",
+                    "px-6 py-[0.73rem] bg-white w-full, flex items-center gap-4  h-[2.959rem] mt-[0.9px]",
                     keyIndex !== 0 && "justify-center"
                   )}
                 >

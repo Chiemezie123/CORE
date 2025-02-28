@@ -1,5 +1,4 @@
 "use client";
-
 import { Typography } from "@/components/typography";
 import { cn } from "@/lib/utils";
 import { Modal } from "@/components/ui/modal";
@@ -8,6 +7,7 @@ import { useState } from "react";
 import AngleUpDownIcon from "@/assets/svg2/AngleUpDownIcon";
 import { Input, RadioInput } from "@/components/input";
 import { Button } from "@/components/ui/button";
+
 const AddFeeModal = ({
   isOpen,
   closeHandler,

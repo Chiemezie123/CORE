@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import { Typography } from "@/components/typography";
 import {
@@ -8,15 +9,21 @@ import {
 import ListingCards from "@/components/Cards/listingCards";
 import { Dash, Expand } from "@/assets/svg2";
 import AnalysisCard from "@/components/Cards/AnalysisCard";
-import MonthlyIssuanceChart from "@/components/barchart";
-import DoughnutChart from "@/components/doughnutChart";
-import LineChart from "@/components/lineChart";
+// import MonthlyIssuanceChart from "@/components/barchart";
+// import DoughnutChart from "@/components/doughnutChart";
+// import LineChart from "@/components/lineChart";
 import ReqCards from "@/components/Cards/reqCards";
 import { Calender } from "@/assets/svg2";
+import dynamic from "next/dynamic";
 
-import StatusModal from "@/components/modal/StatusModal";
+const MonthlyIssuanceChart = dynamic(() => import("../../components/barchart"), { ssr: false });
+
+ const LineChart = dynamic(() => import("../../components/lineChart"), { ssr: false });
+ const DoughnutChart = dynamic(() => import("../../components/doughnutChart"), { ssr: false });
 
 export default function Page() {
+  
+
   const RCR = ["Branch", "Card Type", "Quantity", "Status", "Action"];
 
   return (
@@ -206,21 +213,21 @@ export default function Page() {
             </div>
           </div>
           <div className="h-[318px] border border-[#E2E2E2] rounded-[12px] bg-[#fff] p-[1rem] flex flex-col">
-    <div className="flex items-center">
-        <Typography
-            color="cod-gray-950"
-            variant="h-m"
-            font="Satoshi"
-            fontWeight="medium"
-            className="leading-[18px]"
-        >
-            Card Status Distribution
-        </Typography>
-    </div>
-    <div className="flex-1 min-h-0"> {/* Ensure this div takes remaining space and doesn't overflow */}
-        <DoughnutChart />
-    </div>
-</div>
+        <div className="flex items-center">
+            <Typography
+                color="cod-gray-950"
+                variant="h-m"
+                font="Satoshi"
+                fontWeight="medium"
+                className="leading-[18px]"
+            >
+                Card Status Distribution
+            </Typography>
+        </div>
+        <div className="flex-1 min-h-0"> 
+            <DoughnutChart />
+        </div>
+        </div>
         </div>
       </div>
     </div>

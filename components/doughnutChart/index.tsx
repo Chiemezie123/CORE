@@ -11,6 +11,9 @@ const DoughnutChart = () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null); 
 
     useEffect(() => {
+        if (typeof window !== 'undefined'){
+            console.log("tony")
+        }
         if (!canvasRef.current) return;
 
         if (chartRef.current) {
@@ -64,7 +67,7 @@ const DoughnutChart = () => {
                     },
                 },
                 responsive: true, 
-                maintainAspectRatio: false, // Allow the chart to fill the container
+                maintainAspectRatio: false,
             },
         };
 
@@ -80,7 +83,7 @@ const DoughnutChart = () => {
     return (
         <div className="relative w-full h-full">
             {/* Canvas element without fixed width/height */}
-            <canvas ref={canvasRef} className="w-full h-full"></canvas>
+            <canvas ref={canvasRef} className="w-full h-full inset-0 absolute"></canvas>
             {/* Centered text */}
             <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center flex flex-col gap-1">

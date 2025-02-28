@@ -14,6 +14,10 @@ const LineChart = () => {
 
 
     useEffect(() => {
+        if (typeof window !== 'undefined'){
+            console.log("tony")
+        };
+        
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         };
